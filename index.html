@@ -1,4 +1,6 @@
 <script>
+
+    // getting the computer choice
    function getComputerChoice() {
 
     // pick a number between 1 and 3
@@ -14,8 +16,33 @@
     }
    }
 
+   // playing a round
    function playRound(playerSelection, computerSelection) {
-        // your code here!
+        let player = playerSelection.toUpperCase();
+        let computer = computerSelection.toUpperCase();
+
+        const rock = "ROCK";
+        const paper = "PAPER";
+        const scissors = "SCISSORS";
+
+        // if the result is the same
+        if(player === computer) {
+            return "It's a tie! " + playerSelection + " ties with " + computerSelection;
+        } else if((player === scissors && computer === rock) 
+        || (player === rock && computer === paper) 
+        || (player === paper && computer === scissors)) {
+            // if the player loses
+            return "You Lose! " + computerSelection + " beats " + playerSelection;
+        } else {
+            // if the player wins
+            return "You win! " + playerSelection + " beats " + computerSelection;
+        }
+
+    }
+
+    // running a whole game
+    function game() {
+
     }
 
 
