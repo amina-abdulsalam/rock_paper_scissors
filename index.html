@@ -42,7 +42,13 @@
 
     // running a whole game
     function game() {
-
+        // running 5 rounds
+        for(let i = 0; i < 5; i++) {
+            let player = prompt("Choose rock, paper or scissors!");
+            let computer = getComputerChoice();
+            let result = playRound(player, computer)
+            console.log(result);
+        }
     }
 
 
