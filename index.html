@@ -52,12 +52,14 @@
     function game() {
         // running 5 rounds
         for(let i = 0; i < 5; i++) {
-            let player = prompt("Choose rock, paper or scissors!");
+            let player = prompt("Choose a move: ");
             let computer = getComputerChoice();
             let result = playRound(player, computer)
             console.log(result);
         }
     }
+
+    game();
 
 
 </script>
