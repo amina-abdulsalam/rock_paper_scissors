@@ -5,65 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<body>
+    <h2>Rock Paper Scissors Game!</h2>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+    
+    <h2>Results</h2>
+    <div class="results">
+        <div class="innerResults">
+            
+        </div>
+    </div>
+    <p></p>
+    <pre class="explanation">
+
+    </pre>
+    <h4>Final Results</h4>
+    <div class="final">
+    </div>
+</body>
 
 <script>
-
+    let playerScore = 0;
+    let computerScore = 0;
+    
     // getting the computer choice
-   function getComputerChoice() {
-
-    // pick a number between 1 and 3
-    let choice = Math.floor(Math.random() * 4);
-
-    // picking a choise based on the number
-    if(choice < 1) {
-        return "Rock";
-    } else if(choice < 2) {
-        return "Paper";
-    } else {
-        return "Scissors";
+    function getComputerChoice() {
+        
+        // pick a number between 1 and 3
+        let choice = Math.floor(Math.random() * 4);
+        
+        // picking a choise based on the number
+        if(choice < 1) {
+            return "Rock";
+        } else if(choice < 2) {
+            return "Paper";
+        } else {
+            return "Scissors";
+        }
     }
-   }
-
-   // playing a round
-   function playRound(playerSelection, computerSelection) {
+    
+    // playing a round
+    function playRound(playerSelection, computerSelection) {
         let player = playerSelection.toUpperCase();
         let computer = computerSelection.toUpperCase();
-
+        
         const rock = "ROCK";
         const paper = "PAPER";
         const scissors = "SCISSORS";
-
+        
         // if the result is the same
-        if(player === computer) {
-            return "It's a tie! " + playerSelection + " ties with " + computerSelection;
-        } else if((player === scissors && computer === rock) 
+        if((player === scissors && computer === rock) 
         || (player === rock && computer === paper) 
         || (player === paper && computer === scissors)) {
             // if the player loses
-            return "You Lose! " + computerSelection + " beats " + playerSelection;
-        } else {
+            computerScore++;
+            return "\nYou Lose! " + computerSelection + " beats " + playerSelection;
+        } else if(player != computer) {
             // if the player wins
-            return "You win! " + playerSelection + " beats " + computerSelection;
+            playerScore++;
+            return "\nYou win! " + playerSelection + " beats " + computerSelection;
+        } else {
+            return "\nIt's a tie! " + playerSelection + " ties with " + computerSelection;
         }
-
+        
     }
-
+    
     // running a whole game
     function game() {
-        // running 5 rounds
-        for(let i = 0; i < 5; i++) {
-            let player = prompt("Choose a move: ");
+        
+        const results = document.querySelector(".results");
+        const innerResults = document.querySelector(".innerResults");
+        
+        let pScore = document.createElement("par");
+        pScore.textContent = "Player Score: " + playerScore;
+        innerResults.appendChild(pScore);
+        
+        let cScore = document.createElement("par");
+        cScore.textContent = "Computer Score: " + computerScore;
+        results.appendChild(cScore);
+        
+        const rock = document.querySelector("#rock");
+        rock.addEventListener('click', () => {
             let computer = getComputerChoice();
-            let result = playRound(player, computer)
-            console.log(result);
-        }
+            const explanation = document.querySelector(".explanation");
+            const exp = document.createElement("par"); 
+            exp.textContent = playRound("Rock", computer);
+            explanation.appendChild(exp);
+
+            pScore.textContent = "Player Score: " + playerScore;
+            cScore.textContent = "Computer Score: " + computerScore;
+
+            const finalDiv = document.querySelector(".final");
+            
+            if(playerScore === 5) {
+                let final = document.createElement("h3");
+                final.textContent = "You win!";
+                finalDiv.appendChild(final);
+            } else if(computerScore === 5) {
+                const final = document.createElement("h3");
+                final.textContent = "You lose!";
+                finalDiv.appendChild(final);
+            }
+        });
+        
+        const paper = document.querySelector("#paper");
+        paper.addEventListener('click', () => {
+            let computer = getComputerChoice();
+            const explanation = document.querySelector(".explanation");
+            const exp = document.createElement("par"); 
+            exp.textContent = playRound("Paper", computer);
+            explanation.appendChild(exp);
+
+            pScore.textContent = "Player Score: " + playerScore;
+            cScore.textContent = "Computer Score: " + computerScore;
+            
+            const finalDiv = document.querySelector(".final");
+            
+            if(playerScore === 5) {
+                let final = document.createElement("h3");
+                final.textContent = "You win!";
+                finalDiv.appendChild(final);
+            } else if(computerScore === 5) {
+                const final = document.createElement("h3");
+                final.textContent = "You lose!";
+                finalDiv.appendChild(final);
+            }
+        });
+        
+        const scissors = document.querySelector("#scissors");
+        scissors.addEventListener('click', () => {
+            let computer = getComputerChoice();
+            const explanation = document.querySelector(".explanation");
+            const exp = document.createElement("par"); 
+            exp.textContent = playRound("Scissors", computer);
+            explanation.appendChild(exp);
+
+            pScore.textContent = "Player Score: " + playerScore;
+            cScore.textContent = "Computer Score: " + computerScore;
+            
+            const finalDiv = document.querySelector(".final");
+            
+            if(playerScore === 5) {
+                let final = document.createElement("h3");
+                final.textContent = "You win!";
+                finalDiv.appendChild(final);
+            } else if(computerScore === 5) {
+                const final = document.createElement("h3");
+                final.textContent = "You lose!";
+                finalDiv.appendChild(final);
+            }
+        });
+        
+        
     }
-
-    game();
-
-
-</script>
-<body>
     
-</body>
+    game();
+    
+    
+</script>
 </html>
